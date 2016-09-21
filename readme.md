@@ -1,6 +1,6 @@
 Basic static site builder
 ===
-(note - test site is at http://staticgentest.surge.sh/)
+(note - there is a test site is at http://staticgentest.surge.sh/)
 
 This is a very very simple, no frills static site generator / site builder. There's no fancy parsing, manipulating, or any
 other kind of black magic going on; this is designed to help you get a static site up and going and to allow you to 
@@ -21,17 +21,14 @@ Project Directory Structure
 Take a look at the `site` directory which is structured in a way that works with this system. It should have at a minimum
 * ` layouts` - these contain the html used to render each page. It works just like rails where content gets injected into these layouts, which is then served by the server.
 * ` content` - a directory containing the site content.
-
-At the moment, it's expected to keep this folder at all times in the root of this project, however it is possible to specify an alternate project location though 
-that functionality is currently untested.
  
 How to use
 ====
 There are two ways you can use this system
 
-1. You can use it as a static site generator. Once you're done entering your content, you run `node staticcompile.js` to compile the site
+1. You can use it as a static site generator. Once you're done entering your content, you run `node compiler.js` to compile the site. You can specify a particular directory by adding the `--project` flag, otherwise it will default to looking for a folder called `site` from wherever the script is run. After compiling, you'll have a folder called `dist` in your project folder. You can also specify a `--destination` flag as well, but not that writing to a particular destination is currently un-tested.
 2. A server setup is included as well which can be used to serve as a development platform or simply serve the site itself. You can start the server by running
-`node app.js` from the repository root
+`node app.js` from the repository root. Note that specifying an alternate directory to serve the site from is currently not tested.
 
 Specifics on how to use this system
 ===
@@ -43,8 +40,7 @@ resulting site. That being said, some explanation is still needed on just how to
 Adding content is pretty straightforward. Essentially, all your content should reside in your project's `content` folder. There are some things to keep in mind though while constructing 
 your site.
 
-* there should always be an `assets` and a `pages` folder. There should also always be a `index.html` file. The `assets` folder contains things such as css, js, etc. The `pages` folder should contain all of the content you want residing at the root of 
-the compiled site.
+* there should always be an `assets` and a `pages` folder. There should also always be a `index.html` file. The `assets` folder contains things such as css, js, etc. The `pages` folder should contain all of the content you want residing at the root of the compiled site.
 * for every new folder you create, that will become a new path on the compiled site. For example, you'll see that there's currently a `colors` folder with `hello.mk` and `welcome.html` inside.
 When the site is compiled you could then visit `http://<site url here>/colors/<pagename>`
 
@@ -60,11 +56,13 @@ You can describe your layout by adding a new html file inside of the `layouts` f
 For example, going back to the folder `colors`, inside of `content`, during the compilation process, the script checks to see if there's a specific layout file for the `colors` folder by seeing if there
 is a `colors.html` file inside of `layouts`. If there is, it uses that file as the layout file for any content within the `content/colors` folder; if it can't find it, it instead uses `default.html`
 
+If you happen to have some deeply nested content, for example something at `colors/reds/fuschia`, the layout file that the system will try to look up is `colors.html`
+
 
 Deployment
 =====
 There are many ways to deploy a site with this system
-* you can generate all the necessary files to upload to a service of your choice using the command `node staticcompile.js` 
+* you can generate all the necessary files to upload to a service of your choice using the command `node compiler.js` 
 * you can run the included server setup as well by running `node app.js` (though of course, you'll need to set up a service manager like `pm2` or `nodemon` to keep it up and running without a console)
 
 One cool way for a no frills and headacheless approach to hosting a static site is to have it deploy itself after making a push to a git repository. Since github pages can be a little annoying(at least in my experience), 
