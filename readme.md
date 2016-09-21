@@ -28,7 +28,7 @@ There are two ways you can use this system
 
 1. You can use it as a static site generator. Once you're done entering your content, you run `node compiler.js` to compile the site. You can specify a particular directory by adding the `--project` flag, otherwise it will default to looking for a folder called `site` from wherever the script is run. After compiling, you'll have a folder called `dist` in your project folder. You can also specify a `--destination` flag as well, but note that writing to a particular destination is currently un-tested.
 2. A server setup is included as well which can be used to serve as a development platform or simply serve the site itself. You can start the server by running
-`node app.js` from the repository root. Note that specifying an alternate directory to serve the site from is currently not tested. Also note that server components are not automatically inststalled. To install the server packages, run `npm install --dev`
+`node app.js` from the repository root. Note that specifying an alternate directory to serve the site from is currently not tested. Also note that server components are not automatically installed. To install the server packages, run `npm install --dev`
 
 Specifics on how to use this system
 ===
