@@ -16,7 +16,12 @@ function walk(dir,filelist){
     files.forEach(file => {
         var filepath = `${dir}/${file}`;
 
+        // skip assets folder
         if(dir.search("assets") === -1){
+
+            // if current path is a directory,
+            // start walking that directory
+            // otherwise add an entry in the results array
             if(fs.statSync(filepath).isDirectory()){
                 results = walk(filepath,results);
             }else{
@@ -30,10 +35,24 @@ function walk(dir,filelist){
                 } else {
                     layout = tmp[2] + ".html";
                 }
+
+                var outputPath = path.dirname(filepath).replace("content","");
+
+                if(outputPath === ''){
+                    outputPath = '/'
+                }
+
+                // ensure layout file exists
+                if(!fs.existsSync(`./layouts/${layout}`)){
+                    layout = "default.html"
+                }
+
+                //TODO build output path based on the same structure
                 results.push({
                     name:file,
                     path:path.dirname(filepath),
-                    layoutName:layout
+                    layoutName:layout,
+                    output:outputPath
                 })
             }
         }

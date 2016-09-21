@@ -1,20 +1,26 @@
 const fs = require('fs');
-const determineLayout = require('./staticbuilder/layouts')
 const hogan = require('hogan.js');
 const formatTitle = require('./staticbuilder/titleformater');
 const parseHTMLOrMarkdown = require('./staticbuilder/parseHtmlOrMarkdown');
 const ncp = require('ncp').ncp
 const optionsProcessor = require('./staticbuilder/processoptions')
 const contentParser = require('./staticbuilder/parsecontent');
+const mkdir = require('mkdirp')
+
+
 // setup options
 const options = optionsProcessor();
 
 // path to where the un-compiled files are
-const DIST_PATH = options.destinationLocation;
-const BASE_PATH = options.projectLocation
-const CONTENT_PATH = `${BASE_PATH}/content`
+const DIST_PATH = "./" + options.destinationLocation;
+const CONTENT_PATH = "content"
+const PATH_TO_PROJECT = options.projectFullPath;
 
-// make a "dist" folder if not already present.
+
+// change into the project folder
+process.chdir(PATH_TO_PROJECT);
+
+// make a "build folder" folder if not already present.
 var distExists = fs.existsSync(DIST_PATH);
 if(!distExists){
     fs.mkdirSync(DIST_PATH)
@@ -23,16 +29,15 @@ if(!distExists){
 // parse all of the content for the site
 var contentData = contentParser(CONTENT_PATH);
 
+
 contentData.forEach(data => {
-    const layoutPath = `${BASE_PATH}/layouts/${data.layoutName}`;
+    const layoutPath = `./layouts/${data.layoutName}`;
     const pagePath = `${data.path}/${data.name}`;
 
     // build the title for the page which is based on the filename.
     var name = formatTitle(data.name);
 
-
     var layoutCore = fs.readFileSync(layoutPath, 'utf8');
-
     var content = parseHTMLOrMarkdown(pagePath);
     var compiledTemplate = hogan.compile(layoutCore).render({
         content:content,
@@ -48,8 +53,41 @@ contentData.forEach(data => {
         page = page.replace(".md", ".html");
     }
 
+    // build output directory and output path
+    var outputPath = "";
+    var pathToFile = ""
+    if(data.output.search("pages") !== -1){
+        outputPath = `${DIST_PATH}/${page}`
+        pathToFile = DIST_PATH;
+    }else{
+        outputPath = `${DIST_PATH}/${data.output}/${page}`
+        pathToFile = DIST_PATH + data.output
+    }
+
+    mkdir(pathToFile,function(err){
+        if(err){
+            console.error(err);
+            return;
+        }
+
+        // copy file to distribution directory
+        fs.writeFile(outputPath,compiledTemplate,(err) => {
+            if(err) throw  err;
+        });
+
+
+    });
+
+
+});
 
 
 
+// lastly copy all the assets over to the distribution directory
+ncp('./content/assets',`${DIST_PATH}/assets`,function(err){
+    if(err){
+        console.error(err);
+        return;
+    }
 });
 

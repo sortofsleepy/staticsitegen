@@ -47,8 +47,6 @@ your site.
 the compiled site.
 * for every new folder you create, that will become a new path on the compiled site. For example, you'll see that there's currently a `colors` folder with `hello.mk` and `welcome.html` inside.
 When the site is compiled you could then visit `http://<site url here>/colors/<pagename>`
-* note that since this is designed to be SUPER simple and as pain free as possible, it currently does not support any further nesting of folders. For instance, 
-you can't add another folder `red` within `colors` to get `http://<site url here>/colors/red/<pagename>`
 
 Keeping that in mind, you can add any markdown or html content to your heart's content. You don't even have to bother with adding all the standard html tags! That gets done through...
 
@@ -72,11 +70,10 @@ There are many ways to deploy a site with this system
 One cool way for a no frills and headacheless approach to hosting a static site is to have it deploy itself after making a push to a git repository. Since github pages can be a little annoying(at least in my experience), 
 we're gonna instead use a service called [surge](http://surge.sh)
 
-Building the site automatically with Github
+Example of building a site automatically with Github and Travis CI
 =====
-In order to accomplish this, we need to setup continuous integration. Sadly Github does not have this built in, but you can get this functionality by adding an `Integration` to your
-repository. This is a bit of an involved process since Github doesn't have Continuous integration built in but it's not too bad.
-
+One of the neat things you can do these days is setup Continuous Integration(aka CI) on projects to do any build steps that might be required for your project and then, if you want, have your project
+automatically deploy itself. We're gonna walk through an example of how to deploy with Github and Travis CI to a service called Surge, which provides quick, free hosting for small front-end projects.
 
 __Continous Integration setup__
 
