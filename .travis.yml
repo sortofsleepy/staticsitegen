@@ -5,6 +5,6 @@ install: npm install
 script: node compiler.js
 deploy:
   provider: surge
-  project: ./dist/
+  project: ./site/dist/
   domain: staticgentest.surge.sh
   skip_cleanup: true
