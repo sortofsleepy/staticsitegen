@@ -4,7 +4,7 @@
   "description": "Styleguide for the protos",
   "main": "index.js",
   "scripts": {
-    "start": "node staticcompile.js"
+    "start": "node compiler.js"
   },
   "dependencies": {
     "hapi": "^15.0.3",
