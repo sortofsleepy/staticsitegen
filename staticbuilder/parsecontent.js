@@ -14,48 +14,47 @@ function walk(dir,filelist){
     var results = filelist || [];
 
     files.forEach(file => {
-        var filepath = `${dir}/${file}`;
+       if(file !== ".DS_Store"){
+           var filepath = `${dir}/${file}`;
 
-        // skip assets folder
-        if(dir.search("assets") === -1){
+           // skip assets folder
+           if(dir.search("assets") === -1){
 
-            // if current path is a directory,
-            // start walking that directory
-            // otherwise add an entry in the results array
-            if(fs.statSync(filepath).isDirectory()){
-                results = walk(filepath,results);
-            }else{
-                // parse the layout name, should be the third segment
-                var tmp = dir.split("/");
-                var layout = "";
-                if(tmp[2] === undefined){
-                    layout = "default.html"
-                }else if(dir.search("pages") !== -1) {
-                    layout = "page.html";
-                } else {
-                    layout = tmp[2] + ".html";
-                }
+               // if current path is a directory,
+               // start walking that directory
+               // otherwise add an entry in the results array
+               if(fs.statSync(filepath).isDirectory()){
+                   results = walk(filepath,results);
+               }else{
+                   // parse the layout name, should be the third segment
+                   var tmp = dir.split("/");
 
-                var outputPath = path.dirname(filepath).replace("content","");
+                   var layout = "";
+                   if(tmp.length > 1){
+                       layout = tmp[1] + ".html";
+                   }else{
+                       layout = "default.html";
+                   }
+                   var outputPath = path.dirname(filepath).replace("content","");
+                   if(outputPath === ''){
+                       outputPath = '/'
+                   }
 
-                if(outputPath === ''){
-                    outputPath = '/'
-                }
+                   // ensure layout file exists
+                   if(!fs.existsSync(`./layouts/${layout}`)){
+                       layout = "default.html"
+                   }
 
-                // ensure layout file exists
-                if(!fs.existsSync(`./layouts/${layout}`)){
-                    layout = "default.html"
-                }
-
-                //TODO build output path based on the same structure
-                results.push({
-                    name:file,
-                    path:path.dirname(filepath),
-                    layoutName:layout,
-                    output:outputPath
-                })
-            }
-        }
+                   //TODO build output path based on the same structure
+                   results.push({
+                       name:file,
+                       path:path.dirname(filepath),
+                       layoutName:layout,
+                       output:outputPath
+                   })
+               }
+           }
+       }
     })
 
     return results;

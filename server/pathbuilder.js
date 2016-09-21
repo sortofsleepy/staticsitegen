@@ -34,6 +34,10 @@ module.exports = function(server){
             pagePath[0] = "/"
         }
 
+        if(pagePath[0].search("/pages") !== -1){
+            pagePath[0] = pagePath[0].replace("/pages","")
+        }
+
         paths.push({
             method:'GET',
             path:pagePath[0],
