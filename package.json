@@ -1,0 +1,19 @@
+{
+  "name": "styleguide",
+  "version": "0.0.1",
+  "description": "Styleguide for the protos",
+  "main": "index.js",
+  "scripts": {
+    "start": "node staticcompile.js"
+  },
+  "dependencies": {
+    "hapi": "^15.0.3",
+    "hogan.js": "^3.0.2",
+    "inert": "^4.0.2",
+    "markdown": "^0.5.0",
+    "minimist": "^1.2.0",
+    "ncp": "^2.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "6"
+install: npm install
+script: node staticcompile.js
+deploy:
+  provider: surge
+  project: ./dist/
+  domain: staticgentest.surge.sh
+  skip_cleanup: true
