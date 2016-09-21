@@ -37,3 +37,26 @@ server.start((err) => {
         throw err;
     }
 });
+
+/*
+
+ // set the routes
+ server.route(pathMap);
+
+ // this serves things from the assets folder
+ server.route({
+ method:'GET',
+ path:'/content/assets/{name*}',
+ handler:function(req,reply){
+ var file = `${__dirname}/${server.app.projectLocation}/assets/${req.params.name}`
+ reply.file(file);
+ }
+ });
+
+
+ server.start((err) => {
+ if(err){
+ throw err;
+ }
+ });
+ */

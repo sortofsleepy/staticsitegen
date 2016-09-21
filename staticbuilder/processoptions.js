@@ -10,7 +10,7 @@ module.exports = function(){
     // as the compile script
     if(!argv.hasOwnProperty('project')){
         projectFolder = "site"
-        pathToProjectFolder= "./site"
+        pathToProjectFolder= "site"
     }else{
         // check to make sure that the directory selected has a layouts and contents folder
         if(fs.existsSync(`${argv.project}/content`) && fs.existsSync(`${argv.project}/layouts`))
