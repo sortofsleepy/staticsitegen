@@ -1,6 +1,7 @@
 const fs = require('fs');
 const pageHandler = require('./pagehandler');
 const contentParser = require('../staticbuilder/parsecontent');
+const buildNavigation = require('../staticbuilder/navigation')
 /**
  * This reads the current project structure and assembles all the necessary paths
  * @param server
@@ -22,6 +23,12 @@ module.exports = function(server){
 
     var paths = [];
 
+    // build navigation
+    var navigation = buildNavigation(contentData,options);
+
+    // bundle navigation template into the server state.
+    server.app.navigation = navigation
+
     contentData.forEach(data => {
         const layoutPath = `./layouts/${data.layoutName}`;
         var pagePath = `${data.path}/${data.name}`;
@@ -37,6 +44,8 @@ module.exports = function(server){
         if(pagePath[0].search("/pages") !== -1){
             pagePath[0] = pagePath[0].replace("/pages","")
         }
+
+
 
         paths.push({
             method:'GET',

@@ -5,6 +5,7 @@ const parseHTMLOrMarkdown = require('./staticbuilder/parseHtmlOrMarkdown');
 const ncp = require('ncp').ncp
 const optionsProcessor = require('./staticbuilder/processoptions')
 const contentParser = require('./staticbuilder/parsecontent');
+const buildNavigation = require('./staticbuilder/navigation');
 const mkdir = require('mkdirp')
 
 
@@ -29,7 +30,10 @@ if(!distExists){
 // parse all of the content for the site
 var contentData = contentParser(CONTENT_PATH);
 
+// build a list of links agains the navigation template
+var navigation = buildNavigation(contentData,options);
 
+// build and compile all the data together
 contentData.forEach(data => {
     const layoutPath = `./layouts/${data.layoutName}`;
     const pagePath = `${data.path}/${data.name}`;
@@ -38,10 +42,12 @@ contentData.forEach(data => {
     var name = formatTitle(data.name);
 
     var layoutCore = fs.readFileSync(layoutPath, 'utf8');
-    var content = parseHTMLOrMarkdown(pagePath);
+    var content = parseHTMLOrMarkdown(pagePath,navigation);
+    console.log(hogan.compile(layoutCore).partials)
     var compiledTemplate = hogan.compile(layoutCore).render({
         content:content,
-        title:name
+        title:name,
+        navigation:navigation
     });
 
     var page = data.name;

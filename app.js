@@ -3,7 +3,7 @@ const buildPathMap = require('./server/pathbuilder.js');
 const processOptions = require('./staticbuilder/processoptions');
 const server = new hapi.Server();
 server.connection({
-    port:3002
+    port:3003
 });
 
 server.register(require('inert'), (err) => {
@@ -24,9 +24,9 @@ server.route(pathMap);
 // this serves things from the assets folder
 server.route({
     method:'GET',
-    path:'/content/assets/{name*}',
+    path:'/assets/{name*}',
     handler:function(req,reply){
-        var file = `${__dirname}/${server.app.projectLocation}/assets/${req.params.name}`
+        var file = `${__dirname}/${server.app.projectLocation}/content/assets/${req.params.name}`
         reply.file(file);
     }
 });

@@ -1,52 +1,48 @@
 var fs = require('fs');
+var hogan = require('hogan.js');
+var formatTitle = require('../staticbuilder/titleformater')
 
-// responsible for generating navigation to all of the pages on the site.
-module.exports = function(){
+// compiles navigation template
+module.exports = function(contentData,options){
+    options.navLayout = options.navLayout !== undefined ? options.navLayout : "nav.html";
 
-    const path = __dirname + "/../site"
-    const BASE_PATH = path;
-    // the directories that don't contain any content files or files that are core
-    const excluded = [
-        "layouts",
-        "assets",
-        "index.html"
-    ]
+    // load the navigation template
+    var layoutPath = `../${options.projectFullPath}/layouts/${options.navLayout}`
+    var layout = fs.readFileSync(layoutPath,'utf8');
 
-// read the directory and filter based on the excluded variable above
-    var content = fs.readdirSync(path,"utf8");
-    content = content.filter((page) => {
-        var fn = excluded.indexOf(page);
-        if(fn === -1){
-            return page;
+    // build all of the urls for the site
+    var pathData = contentData.map(data => {
+        var pagePath = `${data.path}/${data.name}`;
+
+        // remove the "content" and the filename of each path
+        pagePath = pagePath.replace("content", "");
+        pagePath = pagePath.split(".");
+
+        if (pagePath[0].search("/index") !== -1) {
+            pagePath[0] = "/"
+        }
+
+        if (pagePath[0].search("/pages") !== -1) {
+            pagePath[0] = pagePath[0].replace("/pages", "")
+        }
+
+        // make sure the names look a bit nicer
+        // if index - make sure name is home
+        var name = formatTitle(data.name);
+        if(name === "Index"){
+            name = "Home";
+        }
+
+        return {
+            name:name,
+            path:pagePath[0]
         }
     });
 
-// read the directories of all the files that contain content, match it up with it's layouts
-// file(the name of which is determined by it's folder name) and compile
-    content = content.map((obj) => {
-
-        // loop through grab all the pages in the current directory of the loop
-        var pages = fs.readdirSync(`${BASE_PATH}/${obj}`,'utf8');
-        var pagePath = `/${obj}/`;
-
-        if(pagePath.search("pages") !== -1){
-            pagePath = "/";
-        }
-
-        var linkInfo = {};
-
-        pages = pages.map(page => {
-            return {
-                name:page.split(".")[0],
-                path:pagePath + page
-            }
-        });
-
-        return pages[0];
+    // compile the urls with the layout
+    layout = hogan.compile(layout).render({
+        navigation:pathData
     });
 
-
-
-    return content;
-
+    return layout;
 }

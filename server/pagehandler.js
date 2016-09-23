@@ -13,10 +13,11 @@ module.exports = function(req,reply,options,projectoptions) {
     // build path to page
     var pagePath = `../${projectoptions.projectFullPath}/${options.path}/${options.name}`
 
-    var content = parseHTMLOrMarkdown(pagePath);
+    var content = parseHTMLOrMarkdown(pagePath,projectoptions.navigation);
     var compiledTemplate = hogan.compile(layoutCore).render({
         content:content,
-        title:name
+        title:name,
+        navigation:projectoptions.navigation
     });
 
     reply(compiledTemplate)

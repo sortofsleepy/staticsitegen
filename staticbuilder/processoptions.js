@@ -5,6 +5,7 @@ module.exports = function(){
     var destinationFolder = "";
     var indexLayout = "";
     var pathToProjectFolder = "";
+    var navLayout = "";
 
     // if we don't have the project flag, assume it's a folder called "site" in the same place
     // as the compile script
@@ -35,11 +36,18 @@ module.exports = function(){
         indexLayout = argv.indexlayout
     }
 
+    // read the layout to use for the navigation. by default it's nav.html
+    if(!argv.hasOwnProperty('navlayout')){
+        navLayout = "nav.html"
+    }else{
+        navLayout = argv.navlayout
+    }
 
     return {
         projectLocation:projectFolder,
         destinationLocation:destinationFolder,
         indexlayout:indexLayout,
-        projectFullPath:pathToProjectFolder
+        projectFullPath:pathToProjectFolder,
+        navLayout:navLayout
     }
 }
