@@ -3,6 +3,12 @@ const markdown = require('markdown').markdown;
 const hogan = require('hogan.js');
 const generateNavigation = require('./navigation');
 
+/**
+ * Parses the HTML/Markdown content
+ * @param filepath the path to the file to process
+ * @param navigation an optional navigation template string
+ * @returns {*}
+ */
 module.exports = function(filepath,navigation){
 
     var contents = fs.readFileSync(filepath,'utf8');

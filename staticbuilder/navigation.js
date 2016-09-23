@@ -2,6 +2,9 @@ var fs = require('fs');
 var hogan = require('hogan.js');
 var formatTitle = require('../staticbuilder/titleformater')
 
+// data for the home page
+var homepageData = {};
+
 // compiles navigation template
 module.exports = function(contentData,options){
     options.navLayout = options.navLayout !== undefined ? options.navLayout : "nav.html";
@@ -29,8 +32,12 @@ module.exports = function(contentData,options){
         // make sure the names look a bit nicer
         // if index - make sure name is home
         var name = formatTitle(data.name);
+
+        // lastly, load the config file that may be present
+        // so we can get the site name if specified.
+        var config = require(`../${options.projectFullPath}/config.js`);
         if(name === "Index"){
-            name = "Home";
+            name = config.siteName !== undefined ? config.siteName : "Home";
         }
 
         return {
@@ -38,6 +45,11 @@ module.exports = function(contentData,options){
             path:pagePath[0]
         }
     });
+
+    // TODO make sure home is the first item in the list
+    var orderedPathData = [];
+
+
 
     // compile the urls with the layout
     layout = hogan.compile(layout).render({

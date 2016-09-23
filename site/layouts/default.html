@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+    <link rel="stylesheet" href="./assets/css/tachyons.css"/>
+    <link rel="stylesheet" href="./assets/css/prisim.css"/>
     <link rel="stylesheet" href="./assets/css/main.css"/>
 </head>
-<body>
+<body class="sans-serif bg-washed-blue">
+    {{{navigation}}}
 
-    {{{content}}}
+    <div id="app" class="fl w-100 w-80-ns">
+        {{{content}}}
+    </div>
+
+    <script src="./assets/js/jquery.js"></script>
 </body>
 </html>

@@ -58,6 +58,17 @@ is a `colors.html` file inside of `layouts`. If there is, it uses that file as t
 
 If you happen to have some deeply nested content, for example something at `colors/reds/fuschia`, the layout file that the system will try to look up is `colors.html`
 
+There are some special tags to be aware of as well when building layouts
+
+```javascript
+    //This tag outputs the navigation for the site. It's precompiled into the whole template.
+    // At the moment, when running the server, keep in mind you'll have to restart the server any time you make a change to the 
+    // nav as a result.
+    {{{navigation}}}
+    
+    // This outputs the content for a page. 
+    {{{content}}}
+````
 
 Deployment
 =====
