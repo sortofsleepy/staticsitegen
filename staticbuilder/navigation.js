@@ -35,13 +35,15 @@ module.exports = function(contentData,options){
 
         // lastly, load the config file that may be present
         // so we can get the site name if specified.
+        var isIndex = false;
         var config = require(`../${options.projectFullPath}/config.js`);
         if(name === "Index"){
+            isIndex = true;
             name = config.siteName !== undefined ? config.siteName : "Home";
         }
-
         return {
             name:name,
+            isIndex:isIndex,
             path:pagePath[0]
         }
     });
@@ -49,11 +51,27 @@ module.exports = function(contentData,options){
     // TODO make sure home is the first item in the list
     var orderedPathData = [];
 
+    var home = pathData.filter((value,index) => {
+        if(value.isIndex){
+            return Object.assign(value,{index:index})
+        }
+    });
+
+
+    // splice home from the current navigation set
+    var p = pathData.splice(home[0].index,1);
+    orderedPathData.push(p[0]);
+    pathData.forEach(obj => {
+        orderedPathData.push(obj);
+    })
+
 
 
     // compile the urls with the layout
     layout = hogan.compile(layout).render({
-        navigation:pathData
+        homepage:p[0],
+        pages:pathData,
+        fullnavigation:orderedPathData
     });
 
     return layout;
