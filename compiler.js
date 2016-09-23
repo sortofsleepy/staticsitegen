@@ -43,7 +43,6 @@ contentData.forEach(data => {
 
     var layoutCore = fs.readFileSync(layoutPath, 'utf8');
     var content = parseHTMLOrMarkdown(pagePath,navigation);
-    console.log(hogan.compile(layoutCore).partials)
     var compiledTemplate = hogan.compile(layoutCore).render({
         content:content,
         title:name,
