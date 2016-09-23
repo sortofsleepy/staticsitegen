@@ -1,6 +1,6 @@
 const fs = require('fs');
 const markdown = require('markdown').markdown;
-const hogan = require('hogan.js');
+const hogan = require('handlebars');
 const generateNavigation = require('./navigation');
 
 /**
@@ -16,13 +16,13 @@ module.exports = function(filepath,navigation){
     if(filepath.search('.md') !== -1 || filepath.search('.mk') !== -1){
 
         // run through hogan first
-        var hParse = hogan.compile(contents).render({
+        var hParse = hogan.compile(contents)({
            navigation:navigation
         });
         return markdown.toHTML(hParse);
     }else{
 
-        var html = hogan.compile(contents).render({
+        var html = hogan.compile(contents)({
             navigation:navigation
         });
         return html;

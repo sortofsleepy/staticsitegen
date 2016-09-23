@@ -1,5 +1,5 @@
 const fs = require('fs');
-const hogan = require('hogan.js');
+const hogan = require('handlebars');
 const formatTitle = require('./staticbuilder/titleformater');
 const parseHTMLOrMarkdown = require('./staticbuilder/parseHtmlOrMarkdown');
 const ncp = require('ncp').ncp
@@ -43,7 +43,7 @@ contentData.forEach(data => {
 
     var layoutCore = fs.readFileSync(layoutPath, 'utf8');
     var content = parseHTMLOrMarkdown(pagePath,navigation);
-    var compiledTemplate = hogan.compile(layoutCore).render({
+    var compiledTemplate = hogan.compile(layoutCore)({
         content:content,
         title:name,
         navigation:navigation

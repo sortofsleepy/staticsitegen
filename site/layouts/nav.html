@@ -1,5 +1,15 @@
 <nav class="m2-4 bg-lightest-blue">
+
     {{#fullnavigation}}
-    <a href="{{path}}">{{name}}</a>
+        {{#if isHome}}
+     <a href="{{path}}" class="home">
+         <h1>{{name}}</h1>
+     </a>
+    {{else}}
+
+        <a href="{{path}}">{{name}}</a>
+
+        {{/if}}
+
     {{/fullnavigation}}
 </nav>

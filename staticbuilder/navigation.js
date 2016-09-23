@@ -1,5 +1,5 @@
 var fs = require('fs');
-var hogan = require('hogan.js');
+var h = require('handlebars');
 var formatTitle = require('../staticbuilder/titleformater')
 
 // data for the home page
@@ -36,13 +36,16 @@ module.exports = function(contentData,options){
         // lastly, load the config file that may be present
         // so we can get the site name if specified.
         var isIndex = false;
+        var isHome = false;
         var config = require(`../${options.projectFullPath}/config.js`);
         if(name === "Index"){
             isIndex = true;
+            isHome = true;
             name = config.siteName !== undefined ? config.siteName : "Home";
         }
         return {
             name:name,
+            isHome:isHome,
             isIndex:isIndex,
             path:pagePath[0]
         }
@@ -66,9 +69,8 @@ module.exports = function(contentData,options){
     })
 
 
-
     // compile the urls with the layout
-    layout = hogan.compile(layout).render({
+    layout = h.compile(layout)({
         homepage:p[0],
         pages:pathData,
         fullnavigation:orderedPathData

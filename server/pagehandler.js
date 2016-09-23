@@ -1,4 +1,4 @@
-const hogan = require('hogan.js')
+const hogan = require('handlebars')
 const fs = require('fs');
 const parseHTMLOrMarkdown = require('../staticbuilder/parseHtmlOrMarkdown');
 const formatTitle = require('../staticbuilder/titleformater')
@@ -14,7 +14,7 @@ module.exports = function(req,reply,options,projectoptions) {
     var pagePath = `../${projectoptions.projectFullPath}/${options.path}/${options.name}`
 
     var content = parseHTMLOrMarkdown(pagePath,projectoptions.navigation);
-    var compiledTemplate = hogan.compile(layoutCore).render({
+    var compiledTemplate = hogan.compile(layoutCore)({
         content:content,
         title:name,
         navigation:projectoptions.navigation
