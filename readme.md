@@ -58,17 +58,6 @@ is a `colors.html` file inside of `layouts`. If there is, it uses that file as t
 
 If you happen to have some deeply nested content, for example something at `colors/reds/fuschia`, the layout file that the system will try to look up is `colors.html`
 
-There are some special tags to be aware of as well when building layouts
-
-```javascript
-    //This tag outputs the navigation for the site. It's precompiled into the whole template.
-    // At the moment, when running the server, keep in mind you'll have to restart the server any time you make a change to the 
-    // nav as a result.
-    {{{navigation}}}
-    
-    // This outputs the content for a page. 
-    {{{content}}}
-````
 
 Deployment
 =====
@@ -113,5 +102,22 @@ You'll need to enter two items
 
 Save that information and at this point, you should be all set to go. The next time you push to github, Travis should do an automatic compilation, then push to the surge.sh site you specified in your `.travis.yml` file. 😀 🔥
 
+Config.js
+=====
+`TODO` at the moment, this doesn't do a whole lot, my move flag settings in here later.
+
+Layout Tags
+=====
+
+There are some special tags to be aware of as well when building layouts
+* `{{{content}}}` - this tag takes the content for a page and replaces itself with it, much like `<%= yield %>` does in Rails
+* `{{{fullnavigation}}` - this outputs an object with content for the current set of pages in the site starting with the index page at the top. You can specify a name to use for the link in `config.js`. This is used the same way you'd use loop over an object in handlebars
+
+```javascript
+   {{#fullnavigation}}
+    <a href="{{path}}">{{name}}</a>
+    {{/fullnavigation}}
+```
+* `{{{homepage}}}` - this outputs a link for the home page
 
 
