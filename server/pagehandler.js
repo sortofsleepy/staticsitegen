@@ -17,6 +17,7 @@ module.exports = function(req,reply,options,projectoptions) {
     var compiledTemplate = hogan.compile(layoutCore)({
         content:content,
         title:name,
+        classname:options.classname,
         navigation:projectoptions.navigation
     });
 

@@ -1,5 +1,6 @@
 
 $padding-top:40px;
+@import "typography";
 *{
 	margin:0;
 	padding:0;
@@ -7,6 +8,8 @@ $padding-top:40px;
 a {
 	text-decoration: none;
 }
+
+
 #app {
 	padding-left: 300px;
 	padding-top: $padding-top;
@@ -24,6 +27,7 @@ nav {
 	background:red;
 	a{
 		display: block;
+		margin-bottom: 10px;
 	}
 }
 
@@ -32,3 +36,6 @@ nav {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
+@import "home";
+@import "setup";

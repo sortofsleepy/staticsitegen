@@ -46,6 +46,7 @@ contentData.forEach(data => {
     var compiledTemplate = hogan.compile(layoutCore)({
         content:content,
         title:name,
+        classname:data.classname,
         navigation:navigation
     });
 

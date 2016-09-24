@@ -1,6 +1,7 @@
 var fs = require('fs');
 var h = require('handlebars');
 var formatTitle = require('../staticbuilder/titleformater')
+var groupSimilar = require('../staticbuilder/groupings.js');
 
 // data for the home page
 var homepageData = {};
@@ -51,7 +52,6 @@ module.exports = function(contentData,options){
         }
     });
 
-    // TODO make sure home is the first item in the list
     var orderedPathData = [];
 
     var home = pathData.filter((value,index) => {
@@ -61,6 +61,7 @@ module.exports = function(contentData,options){
     });
 
 
+
     // splice home from the current navigation set
     var p = pathData.splice(home[0].index,1);
     orderedPathData.push(p[0]);
@@ -68,6 +69,9 @@ module.exports = function(contentData,options){
         orderedPathData.push(obj);
     })
 
+    //TODO Possible todo item - order paths by similarity
+    // map out all of the possibilities
+    //var groups = groupSimilar(orderedPathData);
 
     // compile the urls with the layout
     layout = h.compile(layout)({

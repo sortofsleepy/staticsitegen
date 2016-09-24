@@ -45,9 +45,13 @@ function walk(dir,filelist){
                        layout = "default.html"
                    }
 
+                   // build out a name that can be used as a class name to use on a page
+                   var classname = file.split(".");
+                   classname.pop();
                    //TODO build output path based on the same structure
                    results.push({
                        name:file,
+                       classname:classname[0],
                        path:path.dirname(filepath),
                        layoutName:layout,
                        output:outputPath
