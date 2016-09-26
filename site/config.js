@@ -5,5 +5,6 @@
  */
 
 module.exports = {
-    siteName:"Styler"
+    siteName:"Styler",
+    navGroupPrefix:"group"
 }

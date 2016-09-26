@@ -31,7 +31,7 @@ if(!distExists){
 var contentData = contentParser(CONTENT_PATH);
 
 // build a list of links agains the navigation template
-var navigation = buildNavigation(contentData,options);
+var navigation = buildNavigation(contentData,options,true);
 
 // build and compile all the data together
 contentData.forEach(data => {

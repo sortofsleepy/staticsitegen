@@ -6,10 +6,18 @@ var groupSimilar = require('../staticbuilder/groupings.js');
 // data for the home page
 var homepageData = {};
 
-// compiles navigation template
-module.exports = function(contentData,options){
+/**
+ * This compiles a navigation layout based on the current content for the site.
+ * @param contentData a object containing a map of all of the avaialble content for the site. See staticbuild/parsecontent.js to see what
+ * the object looks like
+ * @param options any project options for the build.
+ * @param isStaticBuild a flag to indicate whether or not this is a static build or not. If it is, we make sure to append a ".html" to the end
+ * of each url.
+ * @returns {*} a compiled handlebars template
+ */
+module.exports = function(contentData,options,isStaticBuild){
     options.navLayout = options.navLayout !== undefined ? options.navLayout : "nav.html";
-
+    var config = require(`../${options.projectFullPath}/config.js`);
     // load the navigation template
     var layoutPath = `../${options.projectFullPath}/layouts/${options.navLayout}`
     var layout = fs.readFileSync(layoutPath,'utf8');
@@ -38,7 +46,7 @@ module.exports = function(contentData,options){
         // so we can get the site name if specified.
         var isIndex = false;
         var isHome = false;
-        var config = require(`../${options.projectFullPath}/config.js`);
+
         if(name === "Index"){
             isIndex = true;
             isHome = true;
@@ -48,7 +56,7 @@ module.exports = function(contentData,options){
             name:name,
             isHome:isHome,
             isIndex:isIndex,
-            path:pagePath[0]
+            path:isStaticBuild === true ? `${pagePath[0]}.html` : pagePath[0]
         }
     });
 
@@ -71,14 +79,30 @@ module.exports = function(contentData,options){
 
     //TODO Possible todo item - order paths by similarity
     // map out all of the possibilities
-    //var groups = groupSimilar(orderedPathData);
+    var groups = groupSimilar(orderedPathData);
 
-    // compile the urls with the layout
-    layout = h.compile(layout)({
+    var finaldata = {
         homepage:p[0],
         pages:pathData,
         fullnavigation:orderedPathData
+    };
+
+    groups.forEach(itm => {
+
+        if(itm.hasOwnProperty("groupName")){
+
+            if(finaldata.hasOwnProperty(itm.groupName)){
+               finaldata[`${config.navGroupPrefix}${itm.groupName}`].push(itm);
+            }else{
+                finaldata[`${config.navGroupPrefix}${itm.groupName}`] = [];
+                finaldata[`${config.navGroupPrefix}${itm.groupName}`].push(itm);
+            }
+
+        }
     });
+
+    // compile the urls with the layout
+    layout = h.compile(layout)(finaldata);
 
     return layout;
 }

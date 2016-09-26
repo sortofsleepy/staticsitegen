@@ -20,5 +20,3 @@ It's recommended you do everything from the clone of the repository that you mad
 Project Directory Structure
 =======
 Take a look at the `site` directory which is structured in a way that works with this system. It should have at a minimum
-* `layouts` - these contain the html used to render each page. It works just like rails where content gets injected into these layouts, which is then served by the server.
-* `content` - a directory containing the site content.
