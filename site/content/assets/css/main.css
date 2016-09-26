@@ -1,6 +1,7 @@
 body {
   font-size: 100%;
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  color: #cfd2da; }
 
 p {
   line-height: 30px; }
@@ -8,9 +9,14 @@ p {
 a {
   color: #000; }
 
+h1, h2, h3, h4 {
+  font-family: 'Questrial',sans-serif; }
+
 nav a {
-  font-family: 'Questrial',sans-serif;
-  letter-spacing: 2px; }
+  letter-spacing: 2px;
+  color: #cfd2da; }
+nav a.home {
+  letter-spacing: 4px; }
 
 * {
   margin: 0;
@@ -18,6 +24,9 @@ nav a {
 
 a {
   text-decoration: none; }
+
+body {
+  background: #252830; }
 
 #app {
   padding-left: 300px;
@@ -29,8 +38,7 @@ nav {
   padding-right: 40px;
   padding-top: 40px;
   min-height: 100%;
-  position: fixed;
-  background: red; }
+  position: fixed; }
   nav a {
     display: block;
     margin-bottom: 10px; }
@@ -47,6 +55,8 @@ nav {
 #page-setup ul {
   padding: 20px; }
 #page-setup code {
-  background: #ddd; }
+  background: #000;
+  padding-left: 2px;
+  padding-right: 2px; }
 
 /*# sourceMappingURL=main.css.map */

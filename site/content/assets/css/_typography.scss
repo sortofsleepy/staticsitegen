@@ -1,6 +1,7 @@
 body {
 	font-size:100%;
 	font-family: 'Open Sans', sans-serif;
+	color:#cfd2da;
 }
 
 p{
@@ -11,9 +12,17 @@ a {
 	color: #000;
 }
 
+h1,h2,h3,h4{
+	font-family: 'Questrial',sans-serif;
+}
+
 nav {
 	a{
-		font-family: 'Questrial',sans-serif;
 		letter-spacing: 2px;
+		color:#cfd2da;
+	}
+
+	a.home {
+		letter-spacing: 4px;
 	}
 }
