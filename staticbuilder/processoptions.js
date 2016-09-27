@@ -24,7 +24,7 @@ module.exports = function(){
     // read where we should output the compiled files. By default, it's a folder called "dist" from
     // wherever the script is run from.
     if(!argv.hasOwnProperty('destination')){
-        destinationFolder = "dist"
+        destinationFolder = "../dist"
     }else{
         destinationFolder = argv.destination;
     }
