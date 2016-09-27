@@ -78,16 +78,11 @@ function compileSite (){
                 console.error(err);
                 return;
             }
-
             // copy file to distribution directory
             fs.writeFile(outputPath,compiledTemplate,(err) => {
                 if(err) throw  err;
             });
-
-
         });
-
-
     });
 
 

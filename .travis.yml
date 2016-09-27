@@ -2,9 +2,9 @@ language: node_js
 node_js:
   - "6"
 install: npm install
-script: node bin/cmd.js
+script: node ./bin/cmd.js
 deploy:
   provider: surge
-  project: ./site/dist
+  project: ./dist
   domain: staticgentest.surge.sh
   skip_cleanup: true
