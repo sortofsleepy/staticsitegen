@@ -1,3 +1,8 @@
+/**
+ * A basic static server for hosting purposes. Can be used to develop, but
+ * should opt for using gulp instead as it'll be less annoying to flush out the navigation
+ */
+
 const hapi = require('hapi');
 const buildPathMap = require('./server/pathbuilder.js');
 const processOptions = require('./staticbuilder/processoptions');

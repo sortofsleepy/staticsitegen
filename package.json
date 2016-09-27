@@ -16,8 +16,12 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1",
     "hapi": "^15.0.3",
     "inert": "^4.0.2"
+  },
+  "bin": {
+    "compile": "./bin/cmd.js"
   },
   "author": "",
   "license": "MIT"
