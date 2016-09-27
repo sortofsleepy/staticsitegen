@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "6"
 install: npm install
-script: node compiler.js
+script: node bin/cmd.js
 deploy:
   provider: surge
   project: ./site/dist
