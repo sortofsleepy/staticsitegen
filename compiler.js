@@ -16,7 +16,7 @@ function compileSite (){
     const options = optionsProcessor();
 
 // path to where the un-compiled files are
-    const DIST_PATH = "./" + options.destinationLocation;
+    const DIST_PATH = options.destinationLocation;
     const CONTENT_PATH = "content"
     const PATH_TO_PROJECT = options.projectFullPath;
 
@@ -27,7 +27,7 @@ function compileSite (){
 // make a "build folder" folder if not already present.
     var distExists = fs.existsSync(DIST_PATH);
     if(!distExists){
-        fs.mkdirSync(DIST_PATH)
+        mkdir(DIST_PATH)
     }
 
 // parse all of the content for the site
