@@ -1,0 +1,66 @@
+body {
+  font-size: 100%;
+  font-family: 'Open Sans', sans-serif; }
+
+p {
+  line-height: 30px; }
+
+a {
+  color: #000; }
+  a:hover {
+    color: #007CC5; }
+
+h1, h2, h3, h4 {
+  font-family: 'Questrial',sans-serif; }
+
+nav a {
+  letter-spacing: 2px; }
+nav a.home {
+  letter-spacing: 4px; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none; }
+
+#app {
+  margin-left: 300px;
+  padding-top: 40px; }
+  @media screen and (max-width: 768px) {
+    #app {
+      margin-left: 0; } }
+
+nav {
+  background: white;
+  min-width: 150px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 40px;
+  min-height: 100%;
+  position: fixed; }
+  nav a {
+    display: block;
+    margin-bottom: 10px; }
+  @media screen and (max-width: 768px) {
+    nav {
+      left: -400px; } }
+
+.block {
+  margin-bottom: 20px;
+  margin-top: 20px; }
+
+.block.description {
+  margin-top: 100px; }
+  .block.description h3 {
+    padding-bottom: 20px; }
+
+#page-setup ul {
+  padding: 20px; }
+#page-setup code {
+  background: #000;
+  padding-left: 2px;
+  padding-right: 2px; }
+
+/*# sourceMappingURL=main.css.map */

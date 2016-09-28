@@ -1,0 +1,30 @@
+{
+  "name": "styleguide",
+  "version": "0.0.1",
+  "description": "Styleguide for the protos",
+  "main": "index.js",
+  "scripts": {
+    "start": "node bin/compiler.js",
+    "dev": "gulp --cwd ./site"
+  },
+  "dependencies": {
+    "dploy": "^1.2.0",
+    "ftp": "^0.3.10",
+    "handlebars": "^4.0.5",
+    "markdown": "^0.5.0",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "ramda": "^0.22.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "hapi": "^15.0.3",
+    "inert": "^4.0.2"
+  },
+  "bin": {
+    "spackle": "./bin/cmd.js"
+  },
+  "author": "",
+  "license": "MIT"
+}

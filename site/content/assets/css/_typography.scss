@@ -1,0 +1,31 @@
+body {
+	font-size:100%;
+	font-family: 'Open Sans', sans-serif;
+	//color:#cfd2da;
+}
+
+p{
+	line-height: 30px;
+}
+
+a {
+	color: #000;
+	&:hover {
+		color:$blue;
+	}
+}
+
+h1,h2,h3,h4{
+	font-family: 'Questrial',sans-serif;
+}
+
+nav {
+	a{
+		letter-spacing: 2px;
+		//color:#cfd2da;
+	}
+
+	a.home {
+		letter-spacing: 4px;
+	}
+}

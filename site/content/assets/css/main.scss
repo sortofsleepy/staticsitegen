@@ -1,0 +1,51 @@
+@import "vars";
+@import "typography";
+*{
+	margin:0;
+	padding:0;
+}
+a {
+	text-decoration: none;
+}
+
+
+body {
+	//background:rgb(37,40,48);
+}
+
+#app {
+	margin-left: 300px;
+	padding-top: $padding-top;
+
+	@media screen and (max-width:768px){
+		margin-left:0;
+	}
+}
+
+// navigation styles
+nav {
+	background:white;
+	min-width: 150px;
+	padding-left: 40px;
+	padding-right:40px;
+	padding-top: $padding-top;
+	min-height:100%;
+	position: fixed;
+	a{
+		display: block;
+		margin-bottom: 10px;
+	}
+
+	@media screen and (max-width:768px){
+		left:-400px;
+	}
+}
+
+// content block
+.block {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+@import "home";
+@import "setup";
