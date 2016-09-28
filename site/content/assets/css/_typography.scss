@@ -1,7 +1,7 @@
 body {
 	font-size:100%;
 	font-family: 'Open Sans', sans-serif;
-	color:#cfd2da;
+	//color:#cfd2da;
 }
 
 p{
@@ -10,6 +10,9 @@ p{
 
 a {
 	color: #000;
+	&:hover {
+		color:$blue;
+	}
 }
 
 h1,h2,h3,h4{
@@ -19,7 +22,7 @@ h1,h2,h3,h4{
 nav {
 	a{
 		letter-spacing: 2px;
-		color:#cfd2da;
+		//color:#cfd2da;
 	}
 
 	a.home {

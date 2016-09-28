@@ -1,8 +1,8 @@
 const fs = require('fs');
 const markdown = require('markdown').markdown;
-const hogan = require('handlebars');
+const h = require('handlebars');
 const generateNavigation = require('./navigation');
-
+const registerHelpers = require('./helpers')
 /**
  * Parses the HTML/Markdown content
  * @param filepath the path to the file to process
@@ -12,17 +12,17 @@ const generateNavigation = require('./navigation');
 module.exports = function(filepath,navigation){
 
     var contents = fs.readFileSync(filepath,'utf8');
-
+    registerHelpers(h);
     if(filepath.search('.md') !== -1 || filepath.search('.mk') !== -1){
 
-        // run through hogan first
-        var hParse = hogan.compile(contents)({
+        // run through h first
+        var hParse = h.compile(contents)({
            navigation:navigation
         });
         return markdown.toHTML(hParse);
     }else{
 
-        var html = hogan.compile(contents)({
+        var html = h.compile(contents)({
             navigation:navigation
         });
         return html;

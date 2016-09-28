@@ -72,3 +72,5 @@ is a `colors.html` file inside of `layouts`. If there is, it uses that file as t
 
 
 If you happen to have some deeply nested content, for example something at `colors/reds/fuschia`, the layout file that the system will try to look up is `colors.html`
+
+

@@ -119,5 +119,3 @@ There are some special tags to be aware of as well when building layouts
     {{/fullnavigation}}
 ```
 * `{{{homepage}}}` - this outputs a link for the home page
-
-

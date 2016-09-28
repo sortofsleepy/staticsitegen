@@ -1,20 +1,20 @@
 body {
   font-size: 100%;
-  font-family: 'Open Sans', sans-serif;
-  color: #cfd2da; }
+  font-family: 'Open Sans', sans-serif; }
 
 p {
   line-height: 30px; }
 
 a {
   color: #000; }
+  a:hover {
+    color: #007CC5; }
 
 h1, h2, h3, h4 {
   font-family: 'Questrial',sans-serif; }
 
 nav a {
-  letter-spacing: 2px;
-  color: #cfd2da; }
+  letter-spacing: 2px; }
 nav a.home {
   letter-spacing: 4px; }
 
@@ -25,14 +25,15 @@ nav a.home {
 a {
   text-decoration: none; }
 
-body {
-  background: #252830; }
-
 #app {
-  padding-left: 300px;
+  margin-left: 300px;
   padding-top: 40px; }
+  @media screen and (max-width: 768px) {
+    #app {
+      margin-left: 0; } }
 
 nav {
+  background: white;
   min-width: 150px;
   padding-left: 40px;
   padding-right: 40px;
@@ -42,6 +43,9 @@ nav {
   nav a {
     display: block;
     margin-bottom: 10px; }
+  @media screen and (max-width: 768px) {
+    nav {
+      left: -400px; } }
 
 .block {
   margin-bottom: 20px;
