@@ -119,6 +119,7 @@ function parseContent(dir){
     var images = [];
     // ====== FILTER OUT IMAGES =============
     // since images could also be in the same directory, filter those out of the overall content map
+    // and into their own map
     results = results.map(itm => {
 
         if(itm.name.search(regex) === -1){
