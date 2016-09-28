@@ -7,7 +7,7 @@ const parsePages = require('./staticbuilder/parseHtmlOrMarkdown');
 const r = require('ramda');
 const mkdir = require('mkdirp');
 const ncp = require('ncp');
-
+const removeExtension = require('./staticbuilder/removeextension')
 function Spackle(){
     // get options from command line
     const options = optionsProcessor();
@@ -63,7 +63,7 @@ function Spackle(){
     data = r.reduce((acc,itm) => {
         var pathToFile = `${DIST_PATH}${itm.output}`
         var distDir = `${DIST_PATH}${itm.outputDir}`
-
+        pathToFile = removeExtension(pathToFile);
         mkdir(distDir,function(err){
             if(err){
                 console.error(err);
