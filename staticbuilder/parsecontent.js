@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-
+var regex = new RegExp("\.(png|jpg|gif)");
 
 /**
  * Builds the content tree and figures out what content there is and it's respective template.
@@ -53,8 +53,6 @@ function walk(dir,filelist){
                    var displayName = "";
                     if(file.search('index') !== -1){
                         var dirName = dir.split('/')
-
-
                         //if length is greater than 1 (which indicates the index), take the last value in the array as the
                         // display name
                         if(dirName.length > 1){
@@ -69,6 +67,11 @@ function walk(dir,filelist){
                    //======= BUILD LINK PATH TO PAGE ============
 
                    outputPath = outputPath.replace("/pages","");
+                   if(file.search(regex)){
+                       outputName = file;
+                   }else{
+                       outputName = file.split('.')[0] + ".html";
+                   }
                    var cleanFilename = "";
                    if(file.search('index') !== -1){
                        cleanFilename = outputPath.split('.')[0];
@@ -95,7 +98,8 @@ function walk(dir,filelist){
                        layoutName:layout,
 
                        // path of where to write the file
-                       output:`${outputPath}/${file}`,
+                       output:`${outputPath}/${outputName}`,
+                       outputDir:outputPath,
 
                        // path of what the link to the page would look like
                        navPath:cleanFilename
@@ -105,17 +109,31 @@ function walk(dir,filelist){
        }
     })
 
-    // ====== FILTER OUT IMAGES =============
-    // since images could also be in the same directory, filter those out of the overall content map
-    results.map(itm => {
-        var regex = new RegExp("\.(png|jpg|gif)");
-        if(itm.name.search(regex) === -1){
-            return itm;
-        }
-    });
 
-    console.log(results);
     return results;
 }
 
-module.exports = walk;
+function parseContent(dir){
+    var results = walk(dir);
+
+    var images = [];
+    // ====== FILTER OUT IMAGES =============
+    // since images could also be in the same directory, filter those out of the overall content map
+    results = results.map(itm => {
+
+        if(itm.name.search(regex) === -1){
+            return itm;
+        }else {
+            images.push(itm);
+        }
+    }).filter(itm => {
+        if(itm !== undefined){
+            return itm;
+        }
+    })
+    return {
+        pageData:results,
+        images:images
+    }
+}
+module.exports = parseContent;

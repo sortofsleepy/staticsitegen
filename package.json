@@ -15,7 +15,8 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
-    "ramda": "^0.22.1"
+    "ramda": "^0.22.1",
+    "through2": "^2.0.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

@@ -16,15 +16,11 @@ module.exports = function(filepath,navigation){
     if(filepath.search('.md') !== -1 || filepath.search('.mk') !== -1){
 
         // run through h first
-        var hParse = h.compile(contents)({
-           navigation:navigation
-        });
+        var hParse = h.compile(contents)();
         return markdown.toHTML(hParse);
     }else{
 
-        var html = h.compile(contents)({
-            navigation:navigation
-        });
+        var html = h.compile(contents)();
         return html;
     }
 }
