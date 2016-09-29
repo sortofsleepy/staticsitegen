@@ -111,7 +111,7 @@ Layout Tags
 
 There are some special tags to be aware of as well when building layouts
 * `{{{content}}}` - this tag takes the content for a page and replaces itself with it, much like `<%= yield %>` does in Rails
-* `{{{fullnavigation}}` - this outputs an object with content for the current set of pages in the site starting with the index page at the top. You can specify a name to use for the link in `config.js`. This is used the same way you'd use loop over an object in handlebars
+* `{{{fullnavigation}}` - this outputs an object with content for the current set of pages in the site starting with the index page at the top. You can specify a name to use for the link in `config.json`. This is used the same way you'd use loop over an object in handlebars
 
 ```javascript
    {{#fullnavigation}}

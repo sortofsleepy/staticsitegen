@@ -11,6 +11,8 @@ const WebSocketServer = require('ws').Server;
 const optionsProcessor = require('./staticbuilder/processoptions')
 const compileSite = require('./servercompiler');
 
+// precompile just to help avoid any confusion
+compileSite(__dirname);
 
 //============ SETUP ================
 var pretty = garnish({

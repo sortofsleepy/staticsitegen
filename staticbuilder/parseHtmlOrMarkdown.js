@@ -1,7 +1,6 @@
 const fs = require('fs');
 const markdown = require('markdown').markdown;
 const h = require('handlebars');
-const generateNavigation = require('./navigation');
 const registerHelpers = require('./helpers')
 /**
  * Parses the HTML/Markdown content

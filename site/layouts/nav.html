@@ -1,16 +1,10 @@
 <nav class="m2-4">
 
-    {{#fullnavigation}}
-        {{#if isHome}}
-     <a href="{{path}}" class="home">
-         <h1>{{name}}</h1>
-     </a>
+    {{#alllinks}}
+    <a href="{{path}}">{{name}}</a>
 
-    {{else}}
-
-        <a href="{{path}}">{{name}}</a>
-
-        {{/if}}
-
-    {{/fullnavigation}}
+    {{/alllinks}}
 </nav>
+
+
+

@@ -8,8 +8,11 @@ const r = require('ramda');
 const mkdir = require('mkdirp');
 const ncp = require('ncp');
 const removeExtension = require('./staticbuilder/removeextension')
-function Spackle(){
-    // get options from command line
+const navBuilder = require('./staticbuilder/navigationBuilder');
+
+function Spackle (){
+
+// get options from command line
     const options = optionsProcessor();
 
 // setup paths
@@ -23,6 +26,9 @@ function Spackle(){
 // parse all the content
     var content = contentParser(CONTENT_PATH);
 
+    content = navBuilder(content,options);
+    console.log(content);
+    var navigation = content.navigation;
 //========= STAGE 1 TRANSFORMATION =================
 // First break things down and merge the content with it's respective layout.
     var data = r.reduce((acc,itm) => {
@@ -33,7 +39,6 @@ function Spackle(){
         // format name
         var name = nameFormater(itm.name);
 
-        var navigation = "";
 
         // build layout and content
         var layoutCore = fs.readFileSync(layoutPath, 'utf8');
@@ -121,6 +126,7 @@ function Spackle(){
             return;
         }
     });
+
 
 
 }

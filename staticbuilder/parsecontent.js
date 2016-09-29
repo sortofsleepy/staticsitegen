@@ -71,7 +71,9 @@ function walk(dir,filelist){
                        outputName = file;
                    }else{
                        outputName = file.split('.')[0] + "index.html";
+
                    }
+
                    var cleanFilename = "";
                    if(file.search('index') !== -1){
                        cleanFilename = outputPath.split('.')[0];
@@ -79,6 +81,7 @@ function walk(dir,filelist){
                        var pathAndFile = `${outputPath}/${file}`;
                         cleanFilename = pathAndFile.split('.')[0]
                    }
+
                    results.push({
 
                        // the name of the file
