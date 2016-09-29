@@ -25,7 +25,7 @@ module.exports = function(){
     // wherever the script is run from.
     if(!argv.hasOwnProperty('destination')){
         //destinationFolder = "../dist"
-        destinationFolder = "./dist"
+        destinationFolder = "../dist"
     }else{
         destinationFolder = argv.destination;
     }
