@@ -8,7 +8,7 @@ const r = require('ramda');
 const mkdir = require('mkdirp');
 const ncp = require('ncp');
 const removeExtension = require('./staticbuilder/removeextension')
-function Spackle(){
+function Spackle(origpath){
     // get options from command line
     const options = optionsProcessor();
 
@@ -123,7 +123,7 @@ function Spackle(){
             return;
         }
     });
-    process.chdir('../');
+    process.chdir(origpath);
 
 }
 

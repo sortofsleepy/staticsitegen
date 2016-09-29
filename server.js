@@ -56,7 +56,7 @@ wss.on('connection',function connection(ws){
 var watcher = chokidar.watch("./" + options.projectLocation);
 watcher.on('change',(path) => {
 
-    compileSite();
+    compileSite(__dirname);
     log.info("file changed - " + path);
 
     if(socket !== null){
