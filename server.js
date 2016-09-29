@@ -9,7 +9,7 @@ const liveReload = require('./server/inject')
 const garnish = require('garnish');
 const WebSocketServer = require('ws').Server;
 const optionsProcessor = require('./staticbuilder/processoptions')
-const compileSite = require('./compiler');
+const compileSite = require('./servercompiler');
 
 
 //============ SETUP ================
@@ -32,8 +32,9 @@ var options = optionsProcessor();
 var app = stacked();
 app.use(liveReload());
 
+var dst = options.destinationLocation.replace("../","./");
 // set up serve func
-var serve = serveStatic(options.destinationLocation,{
+var serve = serveStatic(dst,{
     index:['index.html']
 });
 
@@ -54,11 +55,12 @@ wss.on('connection',function connection(ws){
 
 var watcher = chokidar.watch("./" + options.projectLocation);
 watcher.on('change',(path) => {
-    compileSite(false);
+
+    compileSite();
     log.info("file changed - " + path);
 
     if(socket !== null){
-      //  socket.send("reload")
+        socket.send("reload")
     }
 })
 
