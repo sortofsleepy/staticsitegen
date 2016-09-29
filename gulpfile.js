@@ -49,11 +49,11 @@ gulp.task('compile-site',function(){
 
         var page = data.name;
         if(page.search(".mk") !== -1){
-            page = page.replace(".mk",".html");
+            page = page.replace(".mk","index.html");
         }
 
         if(page.search(".md") !== -1) {
-            page = page.replace(".md", ".html");
+            page = page.replace(".md", "index.html");
         }
 
         // build output directory and output path
@@ -96,11 +96,11 @@ gulp.task('default',['compile-site'],function(){
     // get the directory our project is in
     var dir = options.project !== undefined ? options.project : "./site"
     gulp.watch([
-        "content/**/*.html",
+        "content/**/*index.html",
         "content/**/*.mk",
         "content/**/*.md",
         "content/assets/**/*.scss",
         "content/assets/**/*.css",
-        "layouts/**/*.html",
+        "layouts/**/*index.html",
     ],['compile-site']);
 });

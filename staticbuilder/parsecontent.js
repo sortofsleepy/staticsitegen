@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var regex = new RegExp("\.(png|jpg|gif)");
+var regex = new RegExp("\.(png|jpg|gif|svg)");
 
 /**
  * Builds the content tree and figures out what content there is and it's respective template.
@@ -30,7 +30,7 @@ function walk(dir,filelist){
                    var tmp = dir.split("/");
                    var layout = "";
                    if(tmp.length > 1){
-                       layout = tmp[1] + ".html";
+                       layout = tmp[1] + "index.html";
                    }else{
                        layout = "default.html";
                    }
@@ -70,7 +70,7 @@ function walk(dir,filelist){
                    if(file.search(regex)){
                        outputName = file;
                    }else{
-                       outputName = file.split('.')[0] + ".html";
+                       outputName = file.split('.')[0] + "index.html";
                    }
                    var cleanFilename = "";
                    if(file.search('index') !== -1){

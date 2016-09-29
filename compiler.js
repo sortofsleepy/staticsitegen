@@ -104,11 +104,14 @@ function Spackle(){
     var images = content.images;
     images.forEach(itm => {
         var pathToFile = `${DIST_PATH}${itm.output}`
-        ncp(itm.path,pathToFile,function(err){
-            if(err){
-                console.log(err);
-            }
+        fs.readFile(itm.path,(err,data) => {
+            if(err) throw err;
+
+            fs.writeFile(pathToFile,data,(err)=>{
+                if(err) throw err;
+            })
         })
+
     })
 
 // lastly copy all the assets over to the distribution directory

@@ -11,7 +11,7 @@ var homepageData = {};
  * @param contentData a object containing a map of all of the avaialble content for the site. See staticbuild/parsecontent.js to see what
  * the object looks like
  * @param options any project options for the build.
- * @param isStaticBuild a flag to indicate whether or not this is a static build or not. If it is, we make sure to append a ".html" to the end
+ * @param isStaticBuild a flag to indicate whether or not this is a static build or not. If it is, we make sure to append a "index.html" to the end
  * of each url.
  * @returns {*} a compiled handlebars template
  */
